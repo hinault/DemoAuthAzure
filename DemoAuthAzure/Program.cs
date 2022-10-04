@@ -13,7 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
+    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
+    .EnableTokenAcquisitionToCallDownstreamApi(builder.Configuration.GetValue<string>("API:Scopes")?.Split(' ', System.StringSplitOptions.RemoveEmptyEntries))
+    .AddInMemoryTokenCaches();
 
 builder.Services.AddAuthorization(options =>
 

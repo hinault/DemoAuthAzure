@@ -37,7 +37,6 @@ namespace DemoAuthAzure.Controllers
             return View();
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> Weather()
         {
             return View(await _demoAuthAzureService.Obtenir());

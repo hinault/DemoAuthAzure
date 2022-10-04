@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Identity.Web.Resource;
 
 namespace DemoAuthAzure.API.Controllers
 {
    
-   
+    [Authorize]   
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
