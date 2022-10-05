@@ -17,12 +17,14 @@ namespace DemoAuthAzure.Services
 
         private readonly ITokenAcquisition _tokenAcquisition;
 
+        private readonly IConfiguration _configuration;
        
       
-        public DemoAuthAzureServiceProxy(HttpClient httpClient, ITokenAcquisition tokenAcquisition)
+        public DemoAuthAzureServiceProxy(HttpClient httpClient, ITokenAcquisition tokenAcquisition, IConfiguration configuration)
         {
             _httpClient = httpClient;
             _tokenAcquisition = tokenAcquisition;
+            _configuration = configuration;
         }
 
         public async Task<List<WeatherForecast>> Obtenir()
@@ -37,6 +39,8 @@ namespace DemoAuthAzure.Services
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+            //Ajout de l'API Key dans l'entete HTTP
+            _httpClient.DefaultRequestHeaders.Add("XApiKey", _configuration.GetValue<string>("API:XApiKey"));
         }
 
     }

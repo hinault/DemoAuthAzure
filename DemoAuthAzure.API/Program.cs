@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
+using DemoAuthAzure.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,7 +59,12 @@ builder.Services.AddSwaggerGen(option =>
                     new [] { builder.Configuration.GetSection("AzureAd")["ApiTokenScope"] }
                 }
             });
+
+    //Ajout du paramètre pour l'API Key dans Swagger 
+    option.OperationFilter<AddHeaderParameter>();
 });
+
+
 
 var app = builder.Build();
 
@@ -79,6 +85,9 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+//Ajout du Middleware pour l'API Key
+app.UseMiddleware<ApiKeyMiddleware>();
 
 app.MapControllers();
 
