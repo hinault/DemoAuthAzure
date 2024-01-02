@@ -1,1 +1,1 @@
-Authentification avec Microsoft Identity (Azure Active Directory).
+Authentification avec Microsoft Identity (Microsoft Entra ID).
