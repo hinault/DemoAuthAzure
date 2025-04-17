@@ -1,1 +1,1 @@
-Authentification avec Microsoft Identity (Microsoft Entra ID).
+Démo Authentification avec Microsoft Identity (Microsoft Entra ID).
